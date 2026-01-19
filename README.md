@@ -54,6 +54,8 @@ This documentation covers the **ABHA M1 Sandbox** integration scope for the Vacc
 
 ### High-Level Architecture
 
+This diagram shows the three types of users/clients that access the Vaccination Locker platform and how they connect to the backend:
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Vaccination Locker Platform              │
@@ -62,13 +64,20 @@ This documentation covers the **ABHA M1 Sandbox** integration scope for the Vacc
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
 │  │   Parents    │  │   Hospitals  │  │   Admins     │     │
 │  │   (Mobile)   │  │   (Web/API)  │  │   (Web)      │     │
+│  │              │  │              │  │              │     │
+│  │ Flutter App  │  │ Web Portal  │  │ Admin Panel  │     │
+│  │              │  │ + API Calls │  │              │     │
 │  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘     │
+│         │                  │                  │              │
+│         │  Mobile App      │  Web Browser    │  Web Browser│
+│         │  (iOS/Android)   │  (React/Next.js)│  (React)    │
 │         │                  │                  │              │
 │         └──────────────────┼──────────────────┘             │
 │                            │                                │
 │                   ┌────────▼────────┐                       │
 │                   │  Backend API    │                       │
 │                   │  (FastAPI)      │                       │
+│                   │  REST Endpoints │                       │
 │                   └────────┬────────┘                       │
 │                            │                                │
 │         ┌──────────────────┼──────────────────┐          │
@@ -76,16 +85,36 @@ This documentation covers the **ABHA M1 Sandbox** integration scope for the Vacc
 │  ┌──────▼──────┐  ┌───────▼──────┐  ┌─────────▼──────┐  │
 │  │ PostgreSQL  │  │     Redis     │  │  Google Cloud   │  │
 │  │  Database   │  │    Cache      │  │    Storage      │  │
+│  │             │  │               │  │  (Documents)   │  │
 │  └─────────────┘  └───────────────┘  └─────────────────┘  │
 │                                                              │
 │                            │                                │
 │                   ┌────────▼────────┐                       │
 │                   │  ABHA Linking   │                       │
 │                   │  (M1 Sandbox)   │                       │
+│                   │  Consent Mgmt   │                       │
 │                   └─────────────────┘                       │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Explanation of User Types:**
+
+1. **Parents (Mobile)**: 
+   - Access the platform via **Flutter mobile app** (iOS/Android)
+   - Primary use: Manage their children's vaccination records, view timelines, receive reminders
+   - Features: Child profiles, vaccination tracking, ABHA linking, document upload
+
+2. **Hospitals (Web/API)**:
+   - Access via **Web portal** (React/Next.js) for staff interface
+   - Also use **REST API** directly for integration with hospital systems
+   - Primary use: Record vaccinations, scan QR codes, view beneficiary records
+   - Features: Vaccination recording, QR scanning, patient lookup
+
+3. **Admins (Web)**:
+   - Access via **Web admin panel** (React/Next.js)
+   - Primary use: System administration, hospital management, user management
+   - Features: Hospital registration, user management, system configuration, audit logs
 
 ### Component Description
 

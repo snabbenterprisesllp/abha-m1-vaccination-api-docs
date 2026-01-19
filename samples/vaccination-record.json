@@ -1,0 +1,113 @@
+{
+  "vaccination_record_creation": {
+    "description": "Sample vaccination record creation request",
+    "endpoint": "POST /api/v1/vaccinations",
+    "request": {
+      "beneficiary_id": 11,
+      "vaccine_id": 5,
+      "vaccine_name": "DPT",
+      "dose_number": 1,
+      "vaccination_date": "2024-02-15",
+      "status": "completed",
+      "batch_number": "DPT20240210",
+      "manufacturer": "Serum Institute of India",
+      "expiry_date": "2025-02-10",
+      "site_of_administration": "Left thigh",
+      "route_of_administration": "Intramuscular",
+      "administered_by": "Dr. Rajesh Sharma",
+      "hospital_id": 10,
+      "temperature": "36.8",
+      "temperature_unit": "C",
+      "weight": "8.5",
+      "height_length": "72.0",
+      "pulse_rate": 110,
+      "oxygen_saturation": "99.0",
+      "adverse_reaction": false,
+      "reaction_details": null,
+      "notes": "Vaccination administered successfully. No adverse reactions observed."
+    },
+    "response_success": {
+      "id": 25,
+      "beneficiary_id": 11,
+      "vaccine_id": 5,
+      "vaccine_name": "DPT",
+      "dose_number": 1,
+      "vaccination_date": "2024-02-15",
+      "status": "completed",
+      "batch_number": "DPT20240210",
+      "manufacturer": "Serum Institute of India",
+      "expiry_date": "2025-02-10",
+      "site_of_administration": "Left thigh",
+      "route_of_administration": "Intramuscular",
+      "administered_by": "Dr. Rajesh Sharma",
+      "hospital_id": 10,
+      "temperature": "36.8",
+      "temperature_unit": "C",
+      "weight": "8.5",
+      "height_length": "72.0",
+      "pulse_rate": 110,
+      "oxygen_saturation": "99.0",
+      "adverse_reaction": false,
+      "reaction_details": null,
+      "notes": "Vaccination administered successfully. No adverse reactions observed.",
+      "created_at": "2024-02-15T10:30:00Z",
+      "updated_at": "2024-02-15T10:30:00Z"
+    },
+    "notes": [
+      "All personal identifiers are dummy values",
+      "Hospital ID and vaccine ID are example values",
+      "Vitals are captured at time of vaccination",
+      "Temperature and weight are mandatory fields"
+    ]
+  },
+  "vaccination_record_with_reaction": {
+    "description": "Sample vaccination record with adverse reaction",
+    "request": {
+      "beneficiary_id": 11,
+      "vaccine_id": 8,
+      "vaccine_name": "MMR",
+      "dose_number": 1,
+      "vaccination_date": "2024-03-10",
+      "status": "completed",
+      "batch_number": "MMR20240305",
+      "manufacturer": "Bharat Biotech",
+      "administered_by": "Dr. Priya Patel",
+      "hospital_id": 10,
+      "temperature": "37.2",
+      "temperature_unit": "C",
+      "weight": "9.2",
+      "adverse_reaction": true,
+      "reaction_details": "Mild fever (37.8°C) observed 6 hours after vaccination. Resolved with paracetamol.",
+      "notes": "Parent advised to monitor. Follow-up scheduled."
+    }
+  },
+  "birth_dose_vaccination": {
+    "description": "Sample birth dose vaccination record",
+    "request": {
+      "beneficiary_id": 12,
+      "vaccine_id": 1,
+      "vaccine_name": "BCG",
+      "dose_number": 1,
+      "vaccination_date": "2024-01-20",
+      "status": "completed",
+      "batch_number": "BCG20240115",
+      "manufacturer": "Serum Institute of India",
+      "site_of_administration": "Left arm",
+      "route_of_administration": "Intradermal",
+      "administered_by": "Dr. Anjali Verma",
+      "hospital_id": 15,
+      "temperature": "36.5",
+      "temperature_unit": "C",
+      "weight": "3.2",
+      "height_length": "50.5",
+      "adverse_reaction": false,
+      "notes": "Birth dose administered at hospital. No adverse reactions."
+    },
+    "notes": [
+      "Birth doses are administered at birth or within 24 hours",
+      "No date range calculation for birth doses",
+      "Status shows 'Given on [date]' instead of due date range"
+    ]
+  }
+}
+

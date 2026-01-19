@@ -1,0 +1,96 @@
+{
+  "abha_link_request": {
+    "description": "Sample request to link ABHA number to beneficiary profile",
+    "endpoint": "POST /api/v1/beneficiaries/{beneficiary_id}/abha/link",
+    "request": {
+      "abha_number": "12345678901234",
+      "consent": {
+        "purpose": "Vaccination record sharing for health continuity",
+        "duration": "indefinite",
+        "data_categories": [
+          "vaccination_records",
+          "immunization_history"
+        ],
+        "explicit_consent": true
+      }
+    },
+    "response_success": {
+      "success": true,
+      "message": "ABHA number linked successfully",
+      "beneficiary_id": 11,
+      "abha_number": "12345678901234",
+      "abha_linked": true,
+      "linked_date": "2024-01-15T10:30:00Z",
+      "consent": {
+        "id": 1,
+        "consented": true,
+        "consent_date": "2024-01-15T10:30:00Z",
+        "purpose": "Vaccination record sharing for health continuity",
+        "duration": "indefinite",
+        "data_categories": [
+          "vaccination_records",
+          "immunization_history"
+        ],
+        "revoked": false
+      }
+    },
+    "response_error_invalid_format": {
+      "detail": "ABHA number must be 14 digits"
+    },
+    "response_error_consent_required": {
+      "detail": "Explicit consent is required to link ABHA number"
+    },
+    "notes": [
+      "ABHA number is a dummy value for documentation purposes",
+      "In M1 sandbox, only format validation is performed",
+      "No direct ABDM API calls are made",
+      "Consent is stored internally in the system"
+    ]
+  },
+  "abha_unlink_request": {
+    "description": "Sample request to unlink ABHA number and revoke consent",
+    "endpoint": "POST /api/v1/beneficiaries/{beneficiary_id}/abha/unlink",
+    "request": {
+      "revoke_consent": true,
+      "revocation_reason": "User requested"
+    },
+    "response_success": {
+      "success": true,
+      "message": "ABHA number unlinked successfully",
+      "beneficiary_id": 11,
+      "abha_linked": false,
+      "consent": {
+        "id": 1,
+        "consented": false,
+        "consent_date": "2024-01-15T10:30:00Z",
+        "revoked": true,
+        "revocation_date": "2024-01-20T14:00:00Z",
+        "revocation_reason": "User requested"
+      }
+    }
+  },
+  "abha_status_request": {
+    "description": "Sample request to get ABHA linking status",
+    "endpoint": "GET /api/v1/beneficiaries/{beneficiary_id}/abha/status",
+    "response": {
+      "beneficiary_id": 11,
+      "abha_number": "12345678901234",
+      "abha_linked": true,
+      "linked_date": "2024-01-15T10:30:00Z",
+      "consent": {
+        "id": 1,
+        "consented": true,
+        "consent_date": "2024-01-15T10:30:00Z",
+        "purpose": "Vaccination record sharing for health continuity",
+        "duration": "indefinite",
+        "data_categories": [
+          "vaccination_records",
+          "immunization_history"
+        ],
+        "revoked": false,
+        "revocation_date": null
+      }
+    }
+  }
+}
+

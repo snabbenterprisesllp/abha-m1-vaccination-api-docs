@@ -1,0 +1,179 @@
+{
+  "authentication_responses": {
+    "otp_send_success": {
+      "endpoint": "POST /api/v1/auth/otp/send",
+      "response": {
+        "message": "OTP sent successfully",
+        "otp_expires_in": 300
+      }
+    },
+    "otp_verify_success": {
+      "endpoint": "POST /api/v1/auth/otp/verify",
+      "response": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzA1MzI0MDAwfQ.example",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzEyMTIwMDAwfQ.example",
+        "token_type": "bearer",
+        "expires_in": 3600,
+        "user": {
+          "id": 1,
+          "mobile_number": "9876543210",
+          "role": "parent",
+          "email": null
+        }
+      }
+    },
+    "otp_verify_error": {
+      "response": {
+        "detail": "Invalid OTP. Please try again"
+      }
+    }
+  },
+  "beneficiary_responses": {
+    "parent_profile": {
+      "endpoint": "GET /api/v1/beneficiaries/parent/profile",
+      "response": {
+        "beneficiary": {
+          "id": 10,
+          "first_name": "Rajesh",
+          "last_name": "Kumar",
+          "date_of_birth": "1985-05-15",
+          "gender": "male",
+          "type": "ADULT",
+          "abha_number": null,
+          "abha_linked": false
+        },
+        "vaccinations": [
+          {
+            "id": 1,
+            "vaccine_name": "COVID-19",
+            "dose_number": 1,
+            "vaccination_date": "2021-06-15",
+            "status": "completed"
+          }
+        ]
+      }
+    },
+    "child_profile": {
+      "endpoint": "GET /api/v1/beneficiaries/11",
+      "response": {
+        "id": 11,
+        "first_name": "Priya",
+        "last_name": "Kumar",
+        "date_of_birth": "2020-03-20",
+        "gender": "female",
+        "type": "CHILD",
+        "phone_number": "9876543210",
+        "email": null,
+        "abha_number": "12345678901234",
+        "abha_linked": true,
+        "abha_consent": {
+          "consented": true,
+          "consent_date": "2024-01-15T10:30:00Z",
+          "purpose": "Vaccination record sharing",
+          "revoked": false
+        },
+        "qr_code_url": "https://storage.example.com/qr/beneficiary_11_qr.png",
+        "qr_code_token": "qr_token_abc123",
+        "legacy_child_profile_id": 5
+      }
+    },
+    "create_child_success": {
+      "endpoint": "POST /api/v1/beneficiaries",
+      "response": {
+        "id": 12,
+        "first_name": "Arjun",
+        "last_name": "Kumar",
+        "date_of_birth": "2023-06-15",
+        "gender": "male",
+        "type": "CHILD",
+        "abha_number": null,
+        "abha_linked": false,
+        "created_at": "2024-01-20T10:00:00Z"
+      }
+    }
+  },
+  "vaccination_timeline_response": {
+    "endpoint": "GET /api/v1/beneficiaries/11/vaccination-timeline",
+    "response": {
+      "child": {
+        "id": 11,
+        "name": "Priya Kumar",
+        "dob": "2020-03-20",
+        "age_weeks": 208
+      },
+      "timeline": [
+        {
+          "vaccine_name": "BCG",
+          "vaccine_code": "BCG001",
+          "dose": "Birth Dose",
+          "dose_number": 1,
+          "status": "COMPLETED",
+          "vaccinated_on": "2020-03-20",
+          "due_date": null,
+          "is_birth_dose": true,
+          "vaccination_id": 5,
+          "batch_number": "BCG20200315",
+          "manufacturer": "Serum Institute"
+        },
+        {
+          "vaccine_name": "DPT",
+          "vaccine_code": "DPT001",
+          "dose": "Dose 1",
+          "dose_number": 1,
+          "status": "UPCOMING",
+          "vaccinated_on": null,
+          "due_date": "2024-02-15",
+          "is_birth_dose": false,
+          "vaccination_id": null
+        }
+      ],
+      "reminders": [
+        {
+          "vaccine_name": "DPT",
+          "dose": "Dose 1",
+          "due_date": "2024-02-15",
+          "days_remaining": 7
+        }
+      ]
+    }
+  },
+  "error_responses": {
+    "unauthorized": {
+      "status_code": 401,
+      "response": {
+        "detail": "Could not validate credentials"
+      }
+    },
+    "forbidden": {
+      "status_code": 403,
+      "response": {
+        "detail": "Not enough permissions"
+      }
+    },
+    "not_found": {
+      "status_code": 404,
+      "response": {
+        "detail": "Beneficiary not found"
+      }
+    },
+    "validation_error": {
+      "status_code": 422,
+      "response": {
+        "detail": [
+          {
+            "field": "date_of_birth",
+            "message": "Date of birth cannot be in the future"
+          }
+        ]
+      }
+    }
+  },
+  "notes": [
+    "All sample data uses dummy values",
+    "No real personal identifiers included",
+    "ABHA numbers are example 14-digit numbers",
+    "Timestamps are in ISO 8601 format",
+    "All responses follow REST API best practices"
+  ]
+}
+

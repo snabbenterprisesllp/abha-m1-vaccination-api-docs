@@ -1,0 +1,59 @@
+# Documentation repository - no code files
+*.py
+*.js
+*.ts
+*.dart
+*.java
+*.go
+*.rb
+*.php
+
+# Build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+node_modules/
+dist/
+build/
+*.egg-info/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Secrets and credentials (should never be committed)
+secrets/
+credentials/
+*.key
+*.pem
+*.p12
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Documentation build outputs (if using static site generators)
+_site/
+site/
+
